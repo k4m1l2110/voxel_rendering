@@ -6,13 +6,13 @@
 #define UI_CREATOR_MESH_H
 
 #include <string>
-
+#include <memory>
 #include "../shaders/VAO.hpp"
 #include "../shaders/EBO.hpp"
 #include "../shaders/camera.h"
 #include "../shaders/texture.hpp"
 
-class Mesh {
+class Mesh: public std::enable_shared_from_this<Mesh> {
     std::vector<Vertex> vertices;
     std::vector<GLuint> indices;
     std::vector<Texture> textures;

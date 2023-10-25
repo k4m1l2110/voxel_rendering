@@ -13,10 +13,10 @@ std::string get_file_contents(const char* fn) {
             in.close();
             return content;
         }
-        throw std::runtime_error("Failed to open file"); // Throw a runtime error on file open failure
+        throw std::runtime_error("Failed to open file");
     } catch (const std::exception& e) {
         std::cerr << "Exception: " << e.what() << std::endl;
-        return ""; // Return an empty string to indicate an error
+        return "";
     }
 }
 
@@ -32,32 +32,22 @@ Shader::Shader(const char* vertexf,const char* fragmentf){
     const char* vertexsrc = vertex.c_str();
     const char* fragmentsrc = fragment.c_str();
 
-    //Create vertex shader object and get its ref
     GLuint vertexSh = glCreateShader(GL_VERTEX_SHADER);
-    //Bind source code to vs object
     glShaderSource(vertexSh,1,&vertexsrc,NULL);
-    //Compile sc of vs
     glCompileShader(vertexSh);
     compileErrors(vertexSh,"VERTEX");
 
-    //Create fragment shader object and get its ref
     GLuint fragmentSh = glCreateShader(GL_FRAGMENT_SHADER);
-    //Bind sc to object
     glShaderSource(fragmentSh,1,&fragmentsrc,NULL);
-    //Compile fs
     glCompileShader(fragmentSh);
     compileErrors(fragmentSh,"FRAGMENT");
-    //Create Shader Program Object and get its ref
     ID = glCreateProgram();
 
-    //Attach shader objects to SPO
     glAttachShader(ID,vertexSh);
     glAttachShader(ID,fragmentSh);
 
-    //Wrap-up all shaders together into SPO
     glLinkProgram(ID);
     compileErrors(ID,"PROGRAM");
-    //Delete shaders objects as they are already in SPO
     glDeleteShader(vertexSh);
     glDeleteShader(fragmentSh);
 }
@@ -72,9 +62,7 @@ void Shader::Delete(){
 
 void Shader::compileErrors(unsigned int shader, const char* type)
 {
-	// Stores status of compilation
 	GLint hasCompiled;
-	// Character array to store error message in
 	char infoLog[1024];
 	if (type != "PROGRAM")
 	{

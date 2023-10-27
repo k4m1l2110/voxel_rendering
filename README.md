@@ -3,5 +3,5 @@
 <h2>Usage:</h2>
 <p>Install OpenGL, GLFW, and glm library, glad,KHR and stb is already included with project</p>
 <p> > cmake .</p>
-<p> > ./voxel_rendering x y z</p>
-<p> Tested only on Linux </p>
+<p> > ./voxel_rendering x y z (Map coordinates) </p>
+<p> Tested only on Linux, but should work as well on Windows </p>
